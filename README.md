@@ -1,3 +1,4 @@
+<img width="1920" height="1080" alt="SOMA COVER" src="https://github.com/user-attachments/assets/407cc14f-ba73-422f-b0f4-9f1e6f4fe8c3" />
 
   # The Digital Craftsman: SOMA
   
