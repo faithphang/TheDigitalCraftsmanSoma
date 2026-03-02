@@ -50,19 +50,20 @@ export function LandingPage({ onEnter }: LandingPageProps) {
           onMouseLeave={() => setIsHovered(false)}
           className="group relative transition-all duration-300 ease-out"
         >
-          {/* Logo */}
-          <div className="relative mb-8">
-            <SomaLogo 
-              className={`w-64 h-64 transition-all duration-500 ${
-                isHovered ? 'scale-105 opacity-80' : 'scale-100 opacity-100'
-              }`}
-            />
-          </div>
+          {/* Logo and text combined */}
+          <div className="flex flex-col items-center">
+            {/* Logo */}
+            <div className="relative mb-4">
+              <SomaLogo 
+                className={`w-48 h-48 transition-all duration-500 mix-blend-luminosity ${
+                  isHovered ? 'scale-105 opacity-80' : 'scale-100 opacity-100'
+                }`}
+              />
+            </div>
 
-          {/* Large typography - SOMA */}
-          <div className="text-center">
+            {/* Large typography - SOMA */}
             <h1 
-              className="text-white text-[128px] leading-[0.71] tracking-[-20.48px] mb-0"
+              className="text-white text-[128px] leading-[0.75] tracking-[-4px] mb-0"
               style={{ fontWeight: 500 }}
             >
               SOMA
@@ -72,7 +73,7 @@ export function LandingPage({ onEnter }: LandingPageProps) {
 
         {/* Subtitle */}
         <p 
-          className="text-white/60 text-[24px] tracking-[-1.92px] mt-12"
+          className="text-white/60 text-[24px] tracking-[-0.48px] mt-12 leading-[1.4]"
           style={{ fontWeight: 300 }}
         >
           Creative Build Tools
@@ -81,7 +82,7 @@ export function LandingPage({ onEnter }: LandingPageProps) {
         {/* Loading bar and text */}
         <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 w-64">
           {/* Loading text */}
-          <div className="text-white/40 text-[14px] tracking-[-0.84px]" style={{ fontWeight: 300 }}>
+          <div className="text-white/40 text-[14px] tracking-[-0.28px] leading-[1.5]" style={{ fontWeight: 300 }}>
             {loadingText}
           </div>
           
@@ -94,7 +95,7 @@ export function LandingPage({ onEnter }: LandingPageProps) {
           </div>
           
           {/* Percentage */}
-          <div className="text-white/20 text-[12px] tracking-[-0.72px]" style={{ fontWeight: 300 }}>
+          <div className="text-white/20 text-[12px] tracking-[-0.24px] leading-[1.5]" style={{ fontWeight: 300 }}>
             {loadingProgress}%
           </div>
         </div>
@@ -104,14 +105,14 @@ export function LandingPage({ onEnter }: LandingPageProps) {
       <div className="absolute top-8 left-8 space-y-1">
         <button 
           onClick={onEnter}
-          className="block text-white/60 hover:text-white text-[18px] tracking-[-1.44px] transition-colors text-left"
+          className="block text-white/60 hover:text-white text-[18px] tracking-[-0.36px] leading-[1.5] transition-colors text-left"
           style={{ fontWeight: 300 }}
         >
           tools
         </button>
         <button 
           onClick={onEnter}
-          className="block text-white/60 hover:text-white text-[18px] tracking-[-1.44px] transition-colors text-left"
+          className="block text-white/60 hover:text-white text-[18px] tracking-[-0.36px] leading-[1.5] transition-colors text-left"
           style={{ fontWeight: 300 }}
         >
           start creating
@@ -119,7 +120,7 @@ export function LandingPage({ onEnter }: LandingPageProps) {
       </div>
 
       {/* Version indicator bottom right */}
-      <div className="absolute bottom-8 right-8 text-white/20 text-[12px] tracking-[-0.72px]" style={{ fontWeight: 300 }}>
+      <div className="absolute bottom-8 right-8 text-white/20 text-[12px] tracking-[-0.24px] leading-[1.5]" style={{ fontWeight: 300 }}>
         v1.0
       </div>
     </div>

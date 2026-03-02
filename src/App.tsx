@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LandingPage } from './components/LandingPage';
 import { Launcher } from './components/Launcher';
 import { PhotoEditor } from './components/PhotoEditor';
 import { GraphicDesigner } from './components/GraphicDesigner';
 import { NodeEditor } from './components/NodeEditor';
+import { Onboarding, UserProfile } from './components/Onboarding';
 
-type AppView = 'landing' | 'launcher' | 'photo-editor' | 'graphic-designer' | 'node-editor';
+type AppView = 'onboarding' | 'landing' | 'launcher' | 'photo-editor' | 'graphic-designer' | 'node-editor';
 
 export interface SavedProject {
   id: string;
@@ -23,6 +24,28 @@ export default function App() {
     return saved ? JSON.parse(saved) : [];
   });
   const [currentProjectId, setCurrentProjectId] = useState<string | null>(null);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(() => {
+    const saved = localStorage.getItem('soma-user-profile');
+    return saved ? JSON.parse(saved) : null;
+  });
+
+  // Check if user needs onboarding
+  useEffect(() => {
+    if (!userProfile) {
+      setCurrentView('onboarding');
+    }
+  }, [userProfile]);
+
+  const handleOnboardingComplete = (profile: UserProfile) => {
+    setUserProfile(profile);
+    localStorage.setItem('soma-user-profile', JSON.stringify(profile));
+    setCurrentView('landing');
+  };
+
+  const handleUpdateProfile = (profile: UserProfile) => {
+    setUserProfile(profile);
+    localStorage.setItem('soma-user-profile', JSON.stringify(profile));
+  };
 
   const handleSaveBrush = (brush: any) => {
     setCustomBrushes([...customBrushes, brush]);
@@ -83,10 +106,13 @@ export default function App() {
 
   return (
     <div className="w-screen h-screen overflow-hidden bg-black">
+      {currentView === 'onboarding' && (
+        <Onboarding onComplete={handleOnboardingComplete} />
+      )}
       {currentView === 'landing' && (
         <LandingPage onEnter={() => setCurrentView('launcher')} />
       )}
-      {currentView === 'launcher' && (
+      {currentView === 'launcher' && userProfile && (
         <Launcher 
           onLaunchApp={setCurrentView} 
           onOpenNodeEditor={() => setCurrentView('node-editor')}
@@ -94,6 +120,8 @@ export default function App() {
           onLoadProject={handleLoadProject}
           onNewProject={handleNewProject}
           onDeleteProject={handleDeleteProject}
+          userProfile={userProfile}
+          onUpdateProfile={handleUpdateProfile}
         />
       )}
       {currentView === 'photo-editor' && (
